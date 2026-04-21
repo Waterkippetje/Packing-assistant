@@ -80,41 +80,67 @@ function BookingModal({ pkg, onClose }: { pkg: typeof PACKAGES[0]; onClose: () =
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "12px", marginBottom: "24px" }}>
-          <a
-            href={`mailto:hello@vibrantcodes.com?subject=Boek ${pkg.duration} Vibe Coding Sessie&body=Hoi, ik wil graag de ${pkg.duration} sessie boeken (${pkg.price} excl. BTW*). Laat me weten wanneer je beschikbaar bent.`}
-            style={{
-              display: "flex", alignItems: "center", gap: "16px",
-              padding: "18px 20px", borderRadius: "14px",
-              background: pkg.gradient, textDecoration: "none",
-              color: "white", fontWeight: 700, fontSize: "15px",
-              boxShadow: `0 8px 24px ${pkg.color}40`,
-            }}
-          >
-            <span style={{ fontSize: "24px" }}>📅</span>
-            <div>
-              <div>Sessie Boeken</div>
-              <div style={{ fontSize: "12px", fontWeight: 400, opacity: 0.85 }}>We bevestigen je tijdslot per e-mail</div>
+          {/* Contact blok */}
+          <div style={{
+            display: "flex", flexDirection: "column", gap: "0",
+            borderRadius: "14px", border: "1px solid #2a2a3e", overflow: "hidden",
+          }}>
+            <div style={{
+              padding: "14px 20px", background: "#1A1A2E",
+              fontSize: "13px", fontWeight: 700, color: "#6B7280", letterSpacing: "0.5px",
+              textTransform: "uppercase",
+            }}>
+              💬 Eerst Contact Opnemen
             </div>
-            <span style={{ marginLeft: "auto", fontSize: "18px" }}>→</span>
-          </a>
-
-          <a
-            href={`mailto:hello@vibrantcodes.com?subject=Vraag over ${pkg.duration} Vibe Coding Sessie`}
-            style={{
-              display: "flex", alignItems: "center", gap: "16px",
-              padding: "18px 20px", borderRadius: "14px",
-              background: "#1A1A2E", textDecoration: "none",
-              color: "white", fontWeight: 600, fontSize: "15px",
-              border: "1px solid #2a2a3e",
-            }}
-          >
-            <span style={{ fontSize: "24px" }}>💬</span>
-            <div>
-              <div>Eerst Contact Opnemen</div>
-              <div style={{ fontSize: "12px", fontWeight: 400, color: "#888" }}>Heb je een vraag? Laten we praten</div>
-            </div>
-            <span style={{ marginLeft: "auto", fontSize: "18px", color: "#555" }}>→</span>
-          </a>
+            {[
+              { icon: "✉️", label: "E-mail", value: "berendc@hotmail.com", href: "mailto:berendc@hotmail.com" },
+              { icon: "📱", label: "Telefoon", value: "+31 6 14 57 51 34", href: "tel:+31614575134" },
+              { icon: "🔗", label: "LinkedIn", value: "linkedin.com/in/berendcasper", href: "https://nl.linkedin.com/in/berendcasper" },
+            ].map(c => (
+              <a
+                key={c.label}
+                href={c.href}
+                target={c.label === "LinkedIn" ? "_blank" : undefined}
+                rel="noreferrer"
+                style={{
+                  display: "flex", alignItems: "center", gap: "14px",
+                  padding: "13px 20px", background: "#13131F",
+                  textDecoration: "none", color: "white", fontSize: "14px",
+                  borderTop: "1px solid #2a2a3e",
+                  transition: "background 0.15s",
+                }}
+                onMouseEnter={e => (e.currentTarget.style.background = "#1E1E30")}
+                onMouseLeave={e => (e.currentTarget.style.background = "#13131F")}
+              >
+                <span style={{ fontSize: "18px", width: "24px", textAlign: "center" }}>{c.icon}</span>
+                <div>
+                  <div style={{ fontSize: "11px", color: "#6B7280", marginBottom: "1px" }}>{c.label}</div>
+                  <div style={{ fontWeight: 600 }}>{c.value}</div>
+                </div>
+                <span style={{ marginLeft: "auto", fontSize: "14px", color: "#555" }}>→</span>
+              </a>
+            ))}
+            <button
+              onClick={() => (window as any).Calendly?.initPopupWidget({ url: "https://calendly.com/berendc/30min" })}
+              style={{
+                display: "flex", alignItems: "center", gap: "14px",
+                padding: "13px 20px", background: "#13131F",
+                color: "white", fontSize: "14px", width: "100%",
+                border: "none", borderTop: "1px solid #2a2a3e",
+                cursor: "pointer", textAlign: "left",
+                transition: "background 0.15s",
+              }}
+              onMouseEnter={e => (e.currentTarget.style.background = "#1E1E30")}
+              onMouseLeave={e => (e.currentTarget.style.background = "#13131F")}
+            >
+              <span style={{ fontSize: "18px", width: "24px", textAlign: "center" }}>🗓️</span>
+              <div>
+                <div style={{ fontSize: "11px", color: "#6B7280", marginBottom: "1px" }}>Calendly</div>
+                <div style={{ fontWeight: 600 }}>Plan een gesprek van 30 min</div>
+              </div>
+              <span style={{ marginLeft: "auto", fontSize: "14px", color: "#555" }}>→</span>
+            </button>
+          </div>
         </div>
 
         <button
